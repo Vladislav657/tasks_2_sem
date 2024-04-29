@@ -14,6 +14,7 @@ public:
     }
 
     int digitsSum(int i) const{
+        if (i < 0 || i >= this->size) throw range_error("Incorrect index");
         int n = abs(this->numbers[i]), result = 0;
         while (n > 0){
             result += n % 10;

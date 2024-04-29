@@ -7,7 +7,7 @@ public:
     int rows, cols;
     double **elements;
 
-    Matrix(int rows, int cols, double **elements){ // smooth
+    Matrix(int rows, int cols, double **elements){
         this->elements = new double * [rows];
         for (int i = 0; i < rows; ++i) {
             this->elements[i] = new double [cols];
