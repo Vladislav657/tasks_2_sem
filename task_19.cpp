@@ -43,8 +43,10 @@ int main(){
     int i, j;
     string str;
     cin >> i >> j >> str;
+
     String s = String(str);
     s.reverse(i, j);
     cout << s;
+
     return 0;
 }

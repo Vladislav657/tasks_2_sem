@@ -94,8 +94,12 @@ int main(){
         input[i] = new double [cols];
         for (int j = 0; j < cols; ++j) cin >> input[i][j];
     }
+
     Matrix matrix = Matrix(rows, cols, input);
     matrix.smooth();
     cout << matrix;
+
+    for (int i = 0; i < rows; ++i) delete[] input[i];
+    delete[] input;
     return 0;
 }
