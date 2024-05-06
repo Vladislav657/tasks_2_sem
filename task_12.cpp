@@ -17,6 +17,34 @@ public:
         this->cols = cols;
     }
 
+    bool localMax(int i, int j) const{
+        if (i - 1 >= 0 && j - 1 >= 0){
+            if (this->elements[i][j] <= this->elements[i - 1][j - 1]) return false;
+        }
+        if (i - 1 >= 0 && j + 1 < this->cols){
+            if (this->elements[i][j] <= this->elements[i - 1][j + 1]) return false;
+        }
+        if (i + 1 < this->rows && j - 1 >= 0){
+            if (this->elements[i][j] <= this->elements[i + 1][j - 1]) return false;
+        }
+        if (i + 1 < this->rows && j + 1 < this->cols){
+            if (this->elements[i][j] <= this->elements[i + 1][j + 1]) return false;
+        }
+        if (i - 1 >= 0){
+            if (this->elements[i][j] <= this->elements[i - 1][j]) return false;
+        }
+        if (i + 1 < this->rows){
+            if (this->elements[i][j] <= this->elements[i + 1][j]) return false;
+        }
+        if (j - 1 >= 0){
+            if (this->elements[i][j] <= this->elements[i][j - 1]) return false;
+        }
+        if (j + 1 < this->cols){
+            if (this->elements[i][j] <= this->elements[i][j + 1]) return false;
+        }
+        return true;
+    }
+
     double neighboursAverage(int i, int j) const{
         if (i < 0 || i >= this->rows || j < 0 || j >= this->cols) throw range_error("Indices is out of range");
         int count = 0;
@@ -63,7 +91,8 @@ public:
             for (int j = 0; j < this->cols; ++j) copy[i][j] = this->elements[i][j];
         }
         for (int i = 0; i < this->rows; ++i)
-            for (int j = 0; j < this->cols; ++j) copy[i][j] = neighboursAverage(i, j);
+            for (int j = 0; j < this->cols; ++j)
+                if (localMax(i, j)) copy[i][j] = neighboursAverage(i, j);
         for (int i = 0; i < this->rows; ++i) delete[] this->elements[i];
         delete[] this->elements;
         this->elements = copy;

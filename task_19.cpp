@@ -42,7 +42,7 @@ ostream &operator<<(ostream &out, String& str) {
 int main(){
     int i, j;
     string str;
-    cin >> i >> j >> str;
+    cin >> str >> i >> j;
 
     String s = String(str);
     s.reverse(i, j);
